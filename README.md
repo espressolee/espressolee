@@ -18,16 +18,19 @@ A guardrail nobody has seen fire is theater. The usual failure isn't a missing
 test — it's a check that reports clean because it silently *couldn't run*: a
 parser that returned an empty list, a subprocess whose exit code got dropped, a
 predicate never reached. Each tool ships negative controls that construct the
-violation and assert rejection; `--selftest` runs them. A fourth check enforces
-that contract over the other three, and is registered in its own registry — no
-exemption for the enforcer. No dependencies, Python 3.10+, each file standalone.
+violation and assert rejection; `--selftest` runs them. Three tools, and the
+third enforces that contract over the other two — and over itself, registered in
+its own registry with no exemption for the enforcer. It counts the control lines
+a run printed rather than trusting the summary a script writes about itself. No
+dependencies, Python 3.10+, each file standalone.
 
 **[WarmLogic-OSS](https://github.com/espressolee/WarmLogic-OSS)** ·
 Evidence-centric governance tooling — public subset.
 
 An evaluation harness where a run produces a manifest, a decision log, and a
-verify report, and the verifier can return REJECT. Toy workloads, real refusal
-paths.
+verify report, and verification refuses a run whose stored verdict its own event
+log does not support. Toy workloads; the refusal is real and one shipped run
+triggers it.
 
 **[xinrui-robot-2023](https://github.com/espressolee/xinrui-robot-2023)** ·
 1st place, 7th Xinrui Innovation Robotics Contest — HIT, May 2023.
