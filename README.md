@@ -53,3 +53,7 @@ round trip.
 Most of my work is in private repositories: a deterministic judgment kernel and
 the audit methods around it. What I can show publicly is the discipline, not
 the claims.
+
+**Reach me** at espressolee1@gmail.com. It is in the sidebar too, but GitHub
+shows a profile email only to signed-in visitors, so it is repeated here where
+everyone can read it.
