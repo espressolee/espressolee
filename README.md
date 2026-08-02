@@ -43,12 +43,28 @@ it there. [Match report](https://today.hit.edu.cn/article/2023/05/17/103860)
 
 ---
 
-**Elsewhere.** I sent [PyO3#5774](https://github.com/PyO3/pyo3/pull/5774),
-a `Vec<u8>` fast path for u8-compatible buffer exporters. It was closed, and the
-maintainer's reason was better than my patch: there's no guarantee the exporting
-buffer is properly synchronized, so that choice belongs to user code rather than
-to the extraction impl. CodSpeed also measured an 11.6% regression. Worth the
-round trip.
+**Elsewhere.** Three patches to projects I do not own, and they went three
+different ways.
+
+[mutmut#546](https://github.com/boxed/mutmut/pull/546) — **merged.** A ternary is
+a branch nothing in that mutation tester mutated, and branch coverage cannot see
+an uncovered arm either, so an untested arm read as a pass twice over. Two mutants
+per ternary now force it down each side. The review on an earlier attempt had
+asked to drop the precedence wrapping; that is right for `or True` and wrong for
+`and False`, because `and` binds tighter than a top-level `or` — over all 16
+assignments of `a if b or c else d`, the unwrapped form differs from the original
+on 2 of 16 rather than 6, and only when `b` is falsy, i.e. a mutant tests mostly
+cannot kill. I brought the table rather than the opinion. Closes their #196.
+
+[nox#1153](https://github.com/wntrblm/nox/pull/1153) — **open**, awaiting review.
+Their uv download tests failed on a machine without uv installed. +15/-0.
+
+[PyO3#5774](https://github.com/PyO3/pyo3/pull/5774) — **closed, and rightly.** A
+`Vec<u8>` fast path for u8-compatible buffer exporters. The maintainer's reason
+was better than my patch: there is no guarantee the exporting buffer is properly
+synchronized, so that choice belongs to user code rather than to the extraction
+impl. CodSpeed also measured an 11.6% regression. Worth the round trip, and it
+stays on this list — a record that only shows the accepted ones is not a record.
 
 Most of my work is in private repositories: a deterministic judgment kernel and
 the audit methods around it. What I can show publicly is the discipline, not
