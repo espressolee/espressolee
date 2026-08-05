@@ -56,7 +56,7 @@ assignments of `a if b or c else d`, the unwrapped form differs from the origina
 on 2 of 16 rather than 6, and only when `b` is falsy, i.e. a mutant tests mostly
 cannot kill. I brought the table rather than the opinion. Closes their #196.
 
-[nox#1153](https://github.com/wntrblm/nox/pull/1153) — **open**, awaiting review.
+[nox#1153](https://github.com/wntrblm/nox/pull/1153) — **merged.**
 Their uv download tests failed on a machine without uv installed. +15/-0.
 
 [PyO3#5774](https://github.com/PyO3/pyo3/pull/5774) — **closed, and rightly.** A
@@ -65,6 +65,23 @@ was better than my patch: there is no guarantee the exporting buffer is properly
 synchronized, so that choice belongs to user code rather than to the extraction
 impl. CodSpeed also measured an 11.6% regression. Worth the round trip, and it
 stays on this list — a record that only shows the accepted ones is not a record.
+
+**Free-threading (no-GIL) memory safety.** Two use-after-free reports in C
+extensions, each with a minimal reproducer and three controls — no-mutator,
+decoy, and GIL-on — so the crash is shown to be a free-threading fault, not a
+generic race.
+
+[google-deepmind/tree#143](https://github.com/google-deepmind/tree/issues/143) —
+a borrowed dict key from `PyDict_Next` is dereferenced across `__hash__`/`__eq__`
+in `assert_same_structure`; 10/10 SIGSEGV, and **live by default** because
+pybind11 declares the module no-GIL-safe when it is not.
+
+[confluentinc/confluent-kafka-python#2319](https://github.com/confluentinc/confluent-kafka-python/issues/2319)
+— a borrowed `NewTopic` list item is cast to a C struct and its fields read
+against a stale count; 10/10 SIGSEGV with the GIL forced off, and **latent**
+until the module opts into free-threading — the GIL-on control stays clean, and
+the report leads with that rather than overstating. The scanner that surfaced
+these is a static tool I wrote; a general release is deliberately withheld.
 
 Most of my work is in private repositories: a deterministic judgment kernel and
 the audit methods around it. What I can show publicly is the discipline, not
