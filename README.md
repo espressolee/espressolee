@@ -24,6 +24,17 @@ its own registry with no exemption for the enforcer. It counts the control lines
 a run printed rather than trusting the summary a script writes about itself. No
 dependencies, Python 3.10+, each file standalone.
 
+**[scanner-false-negatives](https://github.com/espressolee/scanner-false-negatives)** ·
+A pre-registered study that refuted its own hypothesis, twice.
+
+I built a scanner, hypothesized where its false negatives cluster, and designed
+the test so it could kill the claim rather than confirm it. It did — the naive
+version on Bandit, and the successor on semgrep, using a discipline rating of
+each layer sealed *before* any defect was classified, so the concordance could
+not be circular. All 61 labels are published so a stranger can re-grade them.
+Exploratory: one grader, no inter-rater agreement yet, and the topic is not new —
+the limits and prior art are on the page.
+
 **[WarmLogic-OSS](https://github.com/espressolee/WarmLogic-OSS)** ·
 Evidence-centric governance tooling — public subset.
 
