@@ -2,6 +2,20 @@
 
 I build checks that can fail, and I try to keep what I claim under what I can show.
 
+**Receipts first — the externally-checkable parts, and their status:**
+
+- [`mutmut#546`](https://github.com/boxed/mutmut/pull/546) · **merged** — a branch
+  nothing in that mutation tester mutated; the fix was accepted upstream.
+- [`nox#1153`](https://github.com/wntrblm/nox/pull/1153) · **merged** — an
+  environment-dependent test failure; the fix was accepted upstream.
+- [`tree#143`](https://github.com/google-deepmind/tree/issues/143) ·
+  [`confluent-kafka-python#2319`](https://github.com/confluentinc/confluent-kafka-python/issues/2319)
+  · **open, awaiting maintainer** — reproduced free-threading use-after-frees.
+- private work · **not publicly claimable** — judge me on the four lines above,
+  not on what I say is behind the wall.
+
+The rest of this page is the longer version of those lines.
+
 That sounds like a slogan, so here is what it costs. The robot below won its
 contest and I published the source unmodified, with the bug still in it and a
 note on why it stays. The audit pipeline in my own public repo turned out to
