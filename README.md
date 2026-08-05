@@ -54,8 +54,8 @@ it there. [Match report](https://today.hit.edu.cn/article/2023/05/17/103860)
 
 ---
 
-**Elsewhere.** Three patches to projects I do not own, and they went three
-different ways.
+**Elsewhere.** Three patches to projects I do not own: **two merged, one closed** —
+and the closed one's maintainer had a better reason than my patch.
 
 [mutmut#546](https://github.com/boxed/mutmut/pull/546) — **merged.** A ternary is
 a branch nothing in that mutation tester mutated, and branch coverage cannot see
@@ -94,9 +94,10 @@ until the module opts into free-threading — the GIL-on control stays clean, an
 the report leads with that rather than overstating. The scanner that surfaced
 these is a static tool I wrote; a general release is deliberately withheld.
 
-Most of my work is in private repositories: a deterministic judgment kernel and
-the audit methods around it. What I can show publicly is the discipline, not
-the claims.
+Most of my work is in private repositories, and it stays private — so I will not
+dress it up as an accomplishment here. A claim you cannot check is exactly the
+thing this profile is about not making. Judge me on the public evidence: the
+reproducers, the negative controls, and the labels published for re-grading.
 
 **Reach me** at espressolee1@gmail.com. It is in the sidebar too, but GitHub
 shows a profile email only to signed-in visitors, so it is repeated here where
