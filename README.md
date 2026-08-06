@@ -8,9 +8,18 @@ I build checks that can fail, and I try to keep what I claim under what I can sh
   nothing in that mutation tester mutated; the fix was accepted upstream.
 - [`nox#1153`](https://github.com/wntrblm/nox/pull/1153) · **merged** — an
   environment-dependent test failure; the fix was accepted upstream.
+- [`StringZilla#328`](https://github.com/ashvardanian/StringZilla/issues/328) ·
+  [`wrapt#347`](https://github.com/GrahamDumpleton/wrapt/issues/347) · **fixed
+  upstream** — two reproduced free-threading crashes their maintainers fixed
+  (`1831ccb`; `2.4.0.dev3`, which I re-measured at the maintainer's request:
+  10/10 SIGSEGV → 0/10). Neither fix is mine.
+- [`Pillow#9854`](https://github.com/python-pillow/Pillow/pull/9854) ·
+  [`python-rapidjson#235`](https://github.com/python-rapidjson/python-rapidjson/pull/235)
+  · **open, unreviewed** — my own fixes for two of the others; the rapidjson one
+  after its maintainer asked for help.
 - [`tree#143`](https://github.com/google-deepmind/tree/issues/143) ·
   [`confluent-kafka-python#2319`](https://github.com/confluentinc/confluent-kafka-python/issues/2319)
-  · **open, awaiting maintainer** — reproduced free-threading use-after-frees.
+  · **open, no response** — reproduced free-threading use-after-frees, untouched.
 - private work · **not publicly claimable** — judge me on the four lines above,
   not on what I say is behind the wall.
 
@@ -37,6 +46,19 @@ third enforces that contract over the other two — and over itself, registered 
 its own registry with no exemption for the enforcer. It counts the control lines
 a run printed rather than trusting the summary a script writes about itself. No
 dependencies, Python 3.10+, each file standalone.
+
+**[free-threading-memory-safety](https://github.com/espressolee/free-threading-memory-safety)** ·
+Six reproduced crashes in free-threaded CPython C extensions, and the denominator.
+
+Every finding is a minimal reproducer plus three controls — no mutator, a decoy
+object, and the same test with the GIL on — so what is shown is a free-threading
+fault rather than a generic race. Before each disclosure I checked the target's
+whole issue and PR tracker, the diffs of anything open near the code, and the
+current source, because a finding that already exists is noise. Two are fixed
+upstream, two have my fix PRs open, two have had no reply, and the page says so
+in those words. It also carries the bounded claim I drew about where these
+crashes concentrate — and the later pre-registered work that falsified it, along
+with the four detection axes that found nothing.
 
 **[scanner-false-negatives](https://github.com/espressolee/scanner-false-negatives)** ·
 A pre-registered study that refuted its own hypothesis, twice.
