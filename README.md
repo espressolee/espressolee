@@ -20,7 +20,7 @@ I build checks that can fail, and I try to keep what I claim under what I can sh
 - [`tree#143`](https://github.com/google-deepmind/tree/issues/143) ·
   [`confluent-kafka-python#2319`](https://github.com/confluentinc/confluent-kafka-python/issues/2319)
   · **open, no response** — reproduced free-threading use-after-frees, untouched.
-- private work · **not publicly claimable** — judge me on the four lines above,
+- private work · **not publicly claimable** — judge me on the lines above,
   not on what I say is behind the wall.
 
 The rest of this page is the longer version of those lines.
