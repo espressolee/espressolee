@@ -29,9 +29,12 @@ Mostly CPython free-threading memory safety, and tooling that refuses to pass qu
   regression. It stays on this list: a record that shows only the accepted ones is
   not a record.
 
-Six reproduced free-threading crashes, each linked above. How many packages I
-examined to find them is not published, so treat six as a numerator without a
-denominator.
+Six reproduced free-threading crashes, each linked above; a seventh is under
+coordinated disclosure and is not described anywhere public. Finding them took a
+survey of 224 packages, of which 65 had sites worth examining — but that write-up
+is not public, and the per-package record behind the number is not published
+anywhere, so the denominator is **stated, not checkable**. Six is a numerator
+against a count you have to take my word for.
 
 **Things I made:**
 
