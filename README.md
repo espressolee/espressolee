@@ -37,25 +37,31 @@ and an exact-head re-test of the eventual fix.
   reported a stale-size borrowed-list-item crash; the maintainer fixed it in
   [`v5.1.1`](https://github.com/ashvardanian/StringZilla/releases/tag/v5.1.1).
   Again: I found and reproduced it; they fixed it.
+- [`confluent-kafka#2319`](https://github.com/confluentinc/confluent-kafka-python/issues/2319)
+  → [`confluent-kafka#2334`](https://github.com/confluentinc/confluent-kafka-python/pull/2334)
+  — reported a borrowed-reference use-after-free in `Admin_create_topics`. A
+  Confluent engineer wrote the fix and it merged on 2026-09-02, but into the
+  `dev_thread_free_support_preview` branch and not `master`; the issue is still
+  open and nothing is released, so this is not a shipped fix. I re-ran my harness
+  against their exact head at their request. The fix is theirs.
 
 ### Open work — not counted as accepted
 
-Status in this section was rechecked on 2026-08-29.
+Status in this section was rechecked on 2026-09-03.
 
 - [`python-rapidjson#235`](https://github.com/python-rapidjson/python-rapidjson/pull/235)
   — my free-threaded container-walk fix; open, with its visible checks green at
   this refresh, but not merged.
 - [`Pillow#9892`](https://github.com/python-pillow/Pillow/issues/9892) →
-  [`Pillow#9893`](https://github.com/python-pillow/Pillow/pull/9893),
+  [`Pillow#9893`](https://github.com/python-pillow/Pillow/pull/9893) and
   [`tree#143`](https://github.com/google-deepmind/tree/issues/143) →
-  [`tree#144`](https://github.com/google-deepmind/tree/pull/144), and
-  [`confluent-kafka#2319`](https://github.com/confluentinc/confluent-kafka-python/issues/2319)
-  → [`confluent-kafka#2334`](https://github.com/confluentinc/confluent-kafka-python/pull/2334)
-  — reproduced free-threading memory-safety faults with fix PRs now open. Those
-  PRs are authored by their maintainers or other contributors, not by me.
+  [`tree#144`](https://github.com/google-deepmind/tree/pull/144) — reproduced
+  free-threading memory-safety faults with fix PRs now open. Those PRs are
+  authored by their maintainers or other contributors, not by me.
 - [`zope.interface#380`](https://github.com/zopefoundation/zope.interface/issues/380)
   — reproduced a free-threaded borrowed-cache lifetime fault; open, with no fix
-  claimed here.
+  claimed here. A maintainer has since called its impact "theoretical at best",
+  and I am not contesting that assessment.
 
 ### A negative receipt
 
