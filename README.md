@@ -54,23 +54,25 @@ of the eventual fix.
 
 - [`Pillow#9917`](https://github.com/python-pillow/Pillow/issues/9917) →
   [`Pillow#9919`](https://github.com/python-pillow/Pillow/pull/9919) — contributed
-  additional re-entrant and concurrent mutation cases, then tested the final
-  Python-side copy on GIL and free-threaded builds. The report and fix PR were
-  written by other contributors; Pillow's maintainers reviewed and merged it.
+  additional re-entrant and concurrent mutation cases, then tested the
+  Python-side copy at commit `655298e` on GIL and free-threaded builds. The
+  report and fix PR were written by other contributors; Pillow's maintainers
+  reviewed and merged it.
 
 ### Open work — not counted as accepted
 
 Status in this section was rechecked on 2026-09-07.
 
 - [`python-rapidjson#235`](https://github.com/python-rapidjson/python-rapidjson/pull/235)
-  — my free-threaded container-walk fix; open, with its visible checks green at
-  this refresh, but not merged.
+  — my free-threaded container-walk fix; open and not merged.
 - [`Pillow#9892`](https://github.com/python-pillow/Pillow/issues/9892) →
-  [`Pillow#9893`](https://github.com/python-pillow/Pillow/pull/9893),
-  [`tree#143`](https://github.com/google-deepmind/tree/issues/143) →
-  [`tree#144`](https://github.com/google-deepmind/tree/pull/144) — reproduced
-  free-threading memory-safety faults with fix PRs still open. Those PRs are
-  authored by their maintainers or other contributors, not by me.
+  [`Pillow#9893`](https://github.com/python-pillow/Pillow/pull/9893) — reported
+  out-of-bounds reads caused by sequence-length handling; the fix PR is open
+  and was authored by another contributor.
+- [`tree#143`](https://github.com/google-deepmind/tree/issues/143) →
+  [`tree#144`](https://github.com/google-deepmind/tree/pull/144) — reported and
+  reproduced memory-safety faults in free-threaded dict traversal; the fix PR
+  is open and was authored by another contributor.
 - [`zope.interface#380`](https://github.com/zopefoundation/zope.interface/issues/380)
   → [`zope.interface#382`](https://github.com/zopefoundation/zope.interface/pull/382)
   — reproduced a free-threaded borrowed-cache lifetime fault; my fix PR is open
@@ -78,21 +80,19 @@ Status in this section was rechecked on 2026-09-07.
   the reported impact "theoretical at best", and I am not contesting that
   assessment.
 
-### A negative receipt
+### A closed contribution
 
-- [`PyO3#5774`](https://github.com/PyO3/pyo3/pull/5774) — closed, and rightly.
-  The maintainer's objection was better than my patch, and CodSpeed measured an
-  11.6% regression. A record that shows only accepted work is not a record.
+- [`PyO3#5774`](https://github.com/PyO3/pyo3/pull/5774) — closed without merging
+  after maintainer feedback. CodSpeed measured an 11.6% regression.
 
 ### Things I made
 
-- [firing-checks](https://github.com/espressolee/firing-checks) — every check ships
-  negative controls and a `--selftest` that runs them, because a guardrail nobody
-  has seen fire is theater. It enforces that rule on three of my own tools.
+- [firing-checks](https://github.com/espressolee/firing-checks) — includes negative
+  controls and a `--selftest` that runs them for three of my own tools.
 - [scanner-false-negatives](https://github.com/espressolee/scanner-false-negatives)
-  — I predicted where a scanner's false negatives cluster, and the data killed
-  the claim twice. All 61 labels are public; they were LLM-produced, have no
-  independent human regrade, and the repository is a post-hoc export.
+  — explored where a scanner's false negatives cluster; the experiments did
+  not support the hypothesis. All 61 labels are public; they were LLM-produced,
+  have no independent human regrade, and the repository is a post-hoc export.
 
 ### Limits
 
