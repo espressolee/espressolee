@@ -1,11 +1,12 @@
 ## espressolee
 
-I build checks that can fail, and I try to keep what I claim under what I can show.
+I work on CPython free-threading memory safety: finding C-extension lifetime
+bugs, building controlled reproducers, and verifying fixes at exact revisions.
 
-Mostly CPython free-threading memory safety, C-extension lifetime bugs, and
-tooling that refuses to pass quietly. When I report a concurrency bug, I try to
-bring an exact revision, a base-positive reproducer, negative and decoy controls,
-and an exact-head re-test of the eventual fix.
+I build checks that can fail, and I try to keep what I claim under what I can
+show. When I report a concurrency bug, I try to bring an exact revision, a
+base-positive reproducer, negative and decoy controls, and an exact-head re-test
+of the eventual fix.
 
 ### Accepted upstream
 
@@ -17,6 +18,10 @@ and an exact-head re-test of the eventual fix.
 - [`python-rapidjson#237`](https://github.com/python-rapidjson/python-rapidjson/pull/237)
   — restored `stubtest`, aligned constructor stubs with the C extension, and
   restricted wheel uploads to release tags.
+- [`python-rapidjson#239`](https://github.com/python-rapidjson/python-rapidjson/pull/239)
+  — fixed the rejected-argument allocation leak in `RawJSON()` and corrected
+  its stub. It merged into `master` and shipped in
+  [`v1.24`](https://github.com/python-rapidjson/python-rapidjson/tree/v1.24).
 - [`nox#1153`](https://github.com/wntrblm/nox/pull/1153) — fixed tests that only
   passed when `uv` happened to be installed.
 - [`mutmut#546`](https://github.com/boxed/mutmut/pull/546) — added ternary-condition
@@ -45,23 +50,33 @@ and an exact-head re-test of the eventual fix.
   open and nothing is released, so this is not a shipped fix. I re-ran my harness
   against their exact head at their request. The fix is theirs.
 
+**Merged fixes I reproduced or reviewed:**
+
+- [`Pillow#9917`](https://github.com/python-pillow/Pillow/issues/9917) →
+  [`Pillow#9919`](https://github.com/python-pillow/Pillow/pull/9919) — contributed
+  additional re-entrant and concurrent mutation cases, then tested the final
+  Python-side copy on GIL and free-threaded builds. The report and fix PR were
+  written by other contributors; Pillow's maintainers reviewed and merged it.
+
 ### Open work — not counted as accepted
 
-Status in this section was rechecked on 2026-09-03.
+Status in this section was rechecked on 2026-09-07.
 
 - [`python-rapidjson#235`](https://github.com/python-rapidjson/python-rapidjson/pull/235)
   — my free-threaded container-walk fix; open, with its visible checks green at
   this refresh, but not merged.
 - [`Pillow#9892`](https://github.com/python-pillow/Pillow/issues/9892) →
-  [`Pillow#9893`](https://github.com/python-pillow/Pillow/pull/9893) and
+  [`Pillow#9893`](https://github.com/python-pillow/Pillow/pull/9893),
   [`tree#143`](https://github.com/google-deepmind/tree/issues/143) →
   [`tree#144`](https://github.com/google-deepmind/tree/pull/144) — reproduced
-  free-threading memory-safety faults with fix PRs now open. Those PRs are
+  free-threading memory-safety faults with fix PRs still open. Those PRs are
   authored by their maintainers or other contributors, not by me.
 - [`zope.interface#380`](https://github.com/zopefoundation/zope.interface/issues/380)
-  — reproduced a free-threaded borrowed-cache lifetime fault; open, with no fix
-  claimed here. A maintainer has since called its impact "theoretical at best",
-  and I am not contesting that assessment.
+  → [`zope.interface#382`](https://github.com/zopefoundation/zope.interface/pull/382)
+  — reproduced a free-threaded borrowed-cache lifetime fault; my fix PR is open
+  and under review, with no accepted fix claimed here. A maintainer has called
+  the reported impact "theoretical at best", and I am not contesting that
+  assessment.
 
 ### A negative receipt
 
