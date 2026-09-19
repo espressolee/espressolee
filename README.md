@@ -29,6 +29,10 @@ of the eventual fix.
 
 **Reports that maintainers turned into fixes:**
 
+- [`pybind11#6180`](https://github.com/pybind/pybind11/pull/6180) — reported
+  unconstructed sibling-base storage surviving deprecated constructor dispatch,
+  and re-tested two reproducer paths against the maintainer's fix at exact revisions.
+  The maintainer authored and merged the fix.
 - [`CodeQL#22305`](https://github.com/github/codeql/issues/22305) →
   [`CodeQL#22310`](https://github.com/github/codeql/pull/22310) — reported lost
   Python taint flow through `list.extend`, `list.insert`, and `+=`; the merged
@@ -37,18 +41,17 @@ of the eventual fix.
 - [`wrapt#347`](https://github.com/GrahamDumpleton/wrapt/issues/347) — reported a
   free-threaded double-free. The maintainer made a broader repair and released
   `2.4.0rc1`; I re-ran the same controlled harness at their request:
-  **10/10 SIGSEGV → 0/10**. The fix is theirs, not mine.
+  **10/10 SIGSEGV → 0/10**.
 - [`StringZilla#328`](https://github.com/ashvardanian/StringZilla/issues/328) —
   reported a stale-size borrowed-list-item crash; the maintainer fixed it in
   [`v5.1.1`](https://github.com/ashvardanian/StringZilla/releases/tag/v5.1.1).
-  Again: I found and reproduced it; they fixed it.
 - [`confluent-kafka#2319`](https://github.com/confluentinc/confluent-kafka-python/issues/2319)
   → [`confluent-kafka#2334`](https://github.com/confluentinc/confluent-kafka-python/pull/2334)
   — reported a borrowed-reference use-after-free in `Admin_create_topics`. A
   Confluent engineer wrote the fix and it merged on 2026-09-02, but into the
   `dev_thread_free_support_preview` branch and not `master`; the issue is still
   open and nothing is released, so this is not a shipped fix. I re-ran my harness
-  against their exact head at their request. The fix is theirs.
+  against their exact head at their request.
 
 **Merged fixes I reproduced or reviewed:**
 
@@ -61,8 +64,12 @@ of the eventual fix.
 
 ### Open work — not counted as accepted
 
-Status in this section was rechecked on 2026-09-07.
+Status in this section was rechecked on 2026-09-19.
 
+- [`pybind11#6177`](https://github.com/pybind/pybind11/pull/6177) — proposed
+  removing an internals-lock acquisition from bound-call dispatch on free-threaded
+  builds, with a regression test that checks whether dispatch can proceed while
+  that lock is held. Open and not merged.
 - [`python-rapidjson#235`](https://github.com/python-rapidjson/python-rapidjson/pull/235)
   — my free-threaded container-walk fix; open and not merged.
 - [`Pillow#9892`](https://github.com/python-pillow/Pillow/issues/9892) →
@@ -77,8 +84,7 @@ Status in this section was rechecked on 2026-09-07.
   → [`zope.interface#382`](https://github.com/zopefoundation/zope.interface/pull/382)
   — reproduced a free-threaded borrowed-cache lifetime fault; my fix PR is open
   and under review, with no accepted fix claimed here. A maintainer has called
-  the reported impact "theoretical at best", and I am not contesting that
-  assessment.
+  the reported impact "theoretical at best".
 
 ### A closed contribution
 
