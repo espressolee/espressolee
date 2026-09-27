@@ -12,6 +12,15 @@ of the eventual fix.
 
 **Code I authored and maintainers merged:**
 
+- [`zope.interface#380`](https://github.com/zopefoundation/zope.interface/issues/380)
+  → [`zope.interface#382`](https://github.com/zopefoundation/zope.interface/pull/382)
+  — contributed C cache-lifetime fixes and regression tests, revised with
+  maintainers during review and merged on 2026-09-23.
+- [`pybind11#6169`](https://github.com/pybind/pybind11/pull/6169) — added
+  regression tests for syntax-error and traceback line numbers in evaluated
+  Python source.
+- [`Pillow#9953`](https://github.com/python-pillow/Pillow/pull/9953) — added
+  regression tests for `ImageChops.offset()` on zero-sized images.
 - [`python-rapidjson#236`](https://github.com/python-rapidjson/python-rapidjson/pull/236)
   — made the free-threading branch run CI, added a real 3.14t job with a
   fail-closed GIL assertion, and repaired the Python <3.13 collection failure.
@@ -27,8 +36,12 @@ of the eventual fix.
 - [`mutmut#546`](https://github.com/boxed/mutmut/pull/546) — added ternary-condition
   mutation for a branch the mutation engine previously never touched.
 
-**Reports that maintainers turned into fixes:**
+**Reports that led to upstream fixes:**
 
+- [`Pillow#9892`](https://github.com/python-pillow/Pillow/issues/9892) →
+  [`Pillow#9893`](https://github.com/python-pillow/Pillow/pull/9893) — reported
+  out-of-bounds reads caused by sequence-length handling. Another contributor,
+  lazerg, authored the fix; Pillow's maintainers merged it on 2026-09-25.
 - [`pybind11#6180`](https://github.com/pybind/pybind11/pull/6180) — reported
   unconstructed sibling-base storage surviving deprecated constructor dispatch,
   and re-tested two reproducer paths against the maintainer's fix at exact revisions.
@@ -48,10 +61,10 @@ of the eventual fix.
 - [`confluent-kafka#2319`](https://github.com/confluentinc/confluent-kafka-python/issues/2319)
   → [`confluent-kafka#2334`](https://github.com/confluentinc/confluent-kafka-python/pull/2334)
   — reported a borrowed-reference use-after-free in `Admin_create_topics`. A
-  Confluent engineer wrote the fix and it merged on 2026-09-02, but into the
-  `dev_thread_free_support_preview` branch and not `master`; the issue is still
-  open and nothing is released, so this is not a shipped fix. I re-ran my harness
-  against their exact head at their request.
+  Confluent engineer wrote the fix, initially merged into the free-threading
+  preview branch. On 2026-09-21, the maintainer
+  [confirmed it had reached `master` and closed the issue](https://github.com/confluentinc/confluent-kafka-python/issues/2319#issuecomment-5759376877).
+  I re-ran my harness against their exact fix head at their request.
 
 **Merged fixes I reproduced or reviewed:**
 
@@ -64,7 +77,7 @@ of the eventual fix.
 
 ### Open work — not counted as accepted
 
-Status in this section was rechecked on 2026-09-19.
+Status in this section was rechecked on 2026-09-27.
 
 - [`pybind11#6177`](https://github.com/pybind/pybind11/pull/6177) — proposed
   removing an internals-lock acquisition from bound-call dispatch on free-threaded
@@ -72,19 +85,10 @@ Status in this section was rechecked on 2026-09-19.
   that lock is held. Open and not merged.
 - [`python-rapidjson#235`](https://github.com/python-rapidjson/python-rapidjson/pull/235)
   — my free-threaded container-walk fix; open and not merged.
-- [`Pillow#9892`](https://github.com/python-pillow/Pillow/issues/9892) →
-  [`Pillow#9893`](https://github.com/python-pillow/Pillow/pull/9893) — reported
-  out-of-bounds reads caused by sequence-length handling; the fix PR is open
-  and was authored by another contributor.
 - [`tree#143`](https://github.com/google-deepmind/tree/issues/143) →
   [`tree#144`](https://github.com/google-deepmind/tree/pull/144) — reported and
   reproduced memory-safety faults in free-threaded dict traversal; the fix PR
   is open and was authored by another contributor.
-- [`zope.interface#380`](https://github.com/zopefoundation/zope.interface/issues/380)
-  → [`zope.interface#382`](https://github.com/zopefoundation/zope.interface/pull/382)
-  — reproduced a free-threaded borrowed-cache lifetime fault; my fix PR is open
-  and under review, with no accepted fix claimed here. A maintainer has called
-  the reported impact "theoretical at best".
 
 ### A closed contribution
 
@@ -103,9 +107,10 @@ Status in this section was rechecked on 2026-09-19.
 ### Limits
 
 I am an external contributor, not a maintainer or core developer of the projects
-above. Open PRs and reports are not accepted work. Private reports are not public
-evidence and are deliberately omitted. My own tools still have no independent
-adopter, so their value outside my repositories remains unmeasured.
+above. Open PRs are not merged contributions, and unresolved reports are not
+counted as fixes. Private reports are not public evidence and are deliberately
+omitted. My own tools still have no independent adopter, so their value outside
+my repositories remains unmeasured.
 
 **Reach me:** espressolee1@gmail.com ·
 [ORCID 0009-0003-0423-6686](https://orcid.org/0009-0003-0423-6686)
