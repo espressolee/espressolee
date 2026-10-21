@@ -12,6 +12,14 @@ of the eventual fix.
 
 **Code I authored and maintainers merged:**
 
+- [`cpython#159864`](https://github.com/python/cpython/issues/159864)
+  → [`cpython#159884`](https://github.com/python/cpython/pull/159884) — reproduced
+  a free-threaded `syslog.openlog()` crash when another thread changes
+  `sys.argv[0]`, and fixed the borrowed reference. A core developer merged it
+  into `main` on 2026-10-20; the 3.15 backport
+  ([`#159952`](https://github.com/python/cpython/pull/159952)) is merged and the
+  3.14 backport ([`#159954`](https://github.com/python/cpython/pull/159954)) is
+  still open. Others had listed the problem before I reproduced it.
 - [`zope.interface#380`](https://github.com/zopefoundation/zope.interface/issues/380)
   → [`zope.interface#382`](https://github.com/zopefoundation/zope.interface/pull/382)
   — contributed C cache-lifetime fixes and regression tests, revised with
@@ -35,6 +43,9 @@ of the eventual fix.
   passed when `uv` happened to be installed.
 - [`mutmut#546`](https://github.com/boxed/mutmut/pull/546) — added ternary-condition
   mutation for a branch the mutation engine previously never touched.
+- [`StringZilla#338`](https://github.com/ashvardanian/StringZilla/pull/338) — stopped
+  the 5.x wheels from installing a top-level `test` package into `site-packages`;
+  merged on 2026-10-02.
 
 **Reports that led to upstream fixes:**
 
@@ -77,7 +88,10 @@ of the eventual fix.
 
 ### Open work — not counted as accepted
 
-Status in this section was rechecked on 2026-09-27.
+Status in this section was rechecked on 2026-10-21.
+
+- [`cpython#157841`](https://github.com/python/cpython/issues/157841) — reported a
+  free-threaded 3.14 crash in concurrent `functools.partial.__setstate__`; open.
 
 - [`pybind11#6177`](https://github.com/pybind/pybind11/pull/6177) — proposed
   removing an internals-lock acquisition from bound-call dispatch on free-threaded
@@ -90,10 +104,14 @@ Status in this section was rechecked on 2026-09-27.
   reproduced memory-safety faults in free-threaded dict traversal; the fix PR
   is open and was authored by another contributor.
 
-### A closed contribution
+### Closed contributions
 
 - [`PyO3#5774`](https://github.com/PyO3/pyo3/pull/5774) — closed without merging
   after maintainer feedback. CodSpeed measured an 11.6% regression.
+- [`Pillow#9854`](https://github.com/python-pillow/Pillow/pull/9854) — proposed a
+  critical section around the `getlist()` walk for
+  [`Pillow#9852`](https://github.com/python-pillow/Pillow/issues/9852); closed
+  without merging. A maintainer closed the issue as completed on 2026-09-04.
 
 ### Things I made
 
